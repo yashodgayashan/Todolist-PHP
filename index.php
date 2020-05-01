@@ -2,11 +2,13 @@
     include('config/db_connect.php');
 
     if(isset($_POST["complete"])){
-        $sql= "UPDATE todos SET isCompleted = 1 WHERE id='" . $_POST["id"] . "'";
+        $id = mysqli_real_escape_string($connection,$_POST["id"]);
+        $sql= "UPDATE todos SET isCompleted = 1 WHERE id='$id'";
         $result = mysqli_query($connection, $sql);
         echo "Completed";
     } elseif(isset($_POST["incomplete"])){
-        $sql= "UPDATE todos SET isCompleted = 0 WHERE id='" . $_POST["id"] . "'";
+        $id = mysqli_real_escape_string($connection,$_POST["id"]);
+        $sql= "UPDATE todos SET isCompleted = 0 WHERE id='$id'";
         $result = mysqli_query($connection, $sql);
         echo "incompleted";
     }
@@ -62,9 +64,7 @@
                             </form>
                         </td>
                         <td class="align-middle">
-                            <form>
-                                <button type="submit" class="btn btn-primary">See more</button>
-                            </form>
+                            <a class="btn btn-primary float-right" href="details.php?id=<?php echo $todo["id"];?>" role="button">See more</a>
                         </td>
                     </tr>
                 <?php endforeach; ?> 
