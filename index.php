@@ -48,8 +48,8 @@
                 <?php foreach($todos as $todo):?>
                     <tr>
                         <?php $completed = $todo["isCompleted"] ? "Completed" : "Not completed"?>
-                        <td class="align-middle"><?php echo $todo["title"]; ?></td>
-                        <td class="align-middle"><?php echo $todo["description"]; ?></td>
+                        <td class="align-middle"><?php echo htmlspecialchars($todo["title"]); ?></td>
+                        <td class="align-middle"><?php echo htmlspecialchars($todo["description"]); ?></td>
                         <td class="align-middle"><?php echo $completed; ?></td>
                         <td class="align-middle">
                             <form action="index.php" method="POST">
