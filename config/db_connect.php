@@ -16,9 +16,21 @@
     // Create database
     $sql = file_get_contents('./resources/create_db.sql');
     if ($conn->query($sql) === TRUE) {
-        echo "Database created successfully";
+        $conn = new mysqli($servername, $username, $password, "todo");
     } else {
         echo "Error creating database: " . $conn->error;
+    }
+
+    $sql = file_get_contents('./resources/create_users_table.sql');
+    if ($conn->query($sql) === TRUE) {
+        $sql = file_get_contents('./resources/create_todos_table.sql');
+        if ($conn->query($sql) === TRUE) {
+            echo "Table created";
+        } else {
+            echo "Error creating table: " . $conn->error;
+        }
+    } else {
+        echo "Error creating table: " . $conn->error;
     }
 
 ?>
