@@ -28,8 +28,8 @@
 <html>
     <?php include("templates/header.php"); ?>
     <div class="row">
-        <div class="col-sm-12 col-md-2 col-lg-2"></div>
-        <div class="col-sm-12 col-md-8 col-lg-8">
+        <div class="col-sm-12 col-md-1 col-lg-2"></div>
+        <div class="col-sm-12 col-md-10 col-lg-8">
             <div class="button-container">
                 <a class="btn btn-primary float-right" href="addTodo.php" role="button">Add Todo</a>
             <div>
@@ -71,7 +71,7 @@
             </tbody>
             </table>
         </div>
-        <div class="col-sm-12 col-md-2 col-lg-2"></div>
+        <div class="col-sm-12 col-md-1 col-lg-2"></div>
     </div>
     <?php include("templates/footer.php"); ?>
 </html>
