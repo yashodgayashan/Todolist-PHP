@@ -2,14 +2,24 @@
     include('config/db_connect.php');
     if(isset($_GET["id"])){
         $id = mysqli_real_escape_string($connection,$_GET["id"]);
+        if(isset($_GET["delete"])){
+            $sql = "DELETE FROM todos WHERE id=$id";
+            
+            if (mysqli_query($connection, $sql)){
+                header("Location: index.php");
+            }else{
+                echo "Query error " . mysqli_error($connection);
+            } 
+        } else {
+            $sql = "SELECT * FROM todos WHERE id=$id";
 
-        $sql = "SELECT * FROM todos WHERE id=$id";
-
-        $result = mysqli_query($connection, $sql);
-        $todo = mysqli_fetch_assoc($result);
-        mysqli_free_result($result);
-        mysqli_close($connection);
-        print_r($todo);
+            $result = mysqli_query($connection, $sql);
+            $todo = mysqli_fetch_assoc($result);
+            mysqli_free_result($result);
+            mysqli_close($connection);
+        }
+    }elseif(isset($_POST["update"])){
+        echo "update";
     }
 ?>
 <!DOCTYPE html>
@@ -33,7 +43,27 @@
                     </div>
                     <a class="btn btn-primary" href="index.php" role="button">Back</a>
                     <button type="submit" name="update" class="btn btn-primary float-right" style="margin:5px;">Update</button>
-                    <button type="submit" name="delete" class="btn btn-danger float-right" style="margin:5px;">Delete</button>
+                    <button type="button" class="btn btn-danger float-right" style="margin:5px;" data-toggle="modal" data-target="#myModal">
+                        Delete
+                    </button>
+
+                    <!-- The Modal -->
+                    <div class="modal" id="myModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                Are you sure to delete <?php echo $todo["title"];?> ?
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                <a class="btn btn-danger float-right" href="details.php?id=<?php echo $todo["id"];?>&&delete=true" role="button">Delete</a>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
