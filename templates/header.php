@@ -21,11 +21,15 @@
             color: white;
             text-align: center;
         }
+        .form-container{
+            border:2px solid #cecece;
+            margin:20px 0;
+        }
     </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a class="navbar-brand" href="#">Todo</a>
+        <a class="navbar-brand" href="index.php">Todo</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -33,7 +37,7 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="btn btn-outline-light" href="#" role="button">Add Todo</a>
+                    <a class="btn btn-outline-light" href="addTodo.php" role="button">Add Todo</a>
                 </li>
             </ul>
         </div>
