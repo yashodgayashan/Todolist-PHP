@@ -1,4 +1,4 @@
-CREATE TABLE todos (
+CREATE TABLE IF NOT EXISTS todos (
     id int NOT NULL AUTO_INCREMENT,
     title varchar(255) NOT NULL,
     description varchar(255),
@@ -7,5 +7,5 @@ CREATE TABLE todos (
     personId int,
     PRIMARY KEY (id),
     FOREIGN KEY (personId) REFERENCES users(id)
-);
+)
 
