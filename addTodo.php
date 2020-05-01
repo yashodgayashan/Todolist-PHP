@@ -18,7 +18,8 @@ echo "hi";
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Description" id="description">
                 </div>
-                <button type="submit" class="btn btn-primary">Add</button>
+                <a class="btn btn-primary" href="index.php" role="button">Back</a>
+                <button type="submit" class="btn btn-primary float-right">Add</button>
             </form>
         </div>
     </div>

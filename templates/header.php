@@ -25,6 +25,10 @@
             border:2px solid #cecece;
             margin:20px 0;
         }
+        .button-container{
+            margin:10px;
+            padding: 10px;
+        }
     </style>
 </head>
 <body>

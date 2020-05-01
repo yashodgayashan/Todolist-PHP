@@ -2,8 +2,12 @@
     include('config/db_connect.php');
 
     if(isset($_POST["complete"])){
+        $sql= "UPDATE todos SET isCompleted = 1 WHERE id='" . $_POST["id"] . "'";
+        $result = mysqli_query($connection, $sql);
         echo "Completed";
     } elseif(isset($_POST["incomplete"])){
+        $sql= "UPDATE todos SET isCompleted = 0 WHERE id='" . $_POST["id"] . "'";
+        $result = mysqli_query($connection, $sql);
         echo "incompleted";
     }
 
@@ -26,6 +30,10 @@
     <div class="row">
         <div class="col-sm-12 col-md-2 col-lg-2"></div>
         <div class="col-sm-12 col-md-8 col-lg-8">
+            <div class="button-container">
+                <a class="btn btn-primary float-right" href="addTodo.php" role="button">Add Todo</a>
+            <div>
+            <div class="button-container"></div>
             <table class="table table-striped table-secondary table-hover" style="margin:20px 0;">
             <thead>
                 <tr>
@@ -45,16 +53,17 @@
                         <td class="align-middle"><?php echo $completed; ?></td>
                         <td class="align-middle">
                             <form action="index.php" method="POST">
+                                <input type="hidden" id="id" name="id" value="<?php echo $todo["id"]; ?>">
                                 <?php if($todo["isCompleted"]):?>
-                                    <button type="submit" name="incomplete" class="btn btn-secondary">Mark as incompleted</button>
+                                    <button type="submit" name="incomplete" class="btn btn-warning">Mark as incompleted</button>
                                 <?php else:?>
-                                    <button type="submit" name="complete" class="btn btn-secondary">Mark as done</button>
+                                    <button type="submit" name="complete" class="btn btn-success">Mark as done</button>
                                 <?php endif;?>
                             </form>
                         </td>
                         <td class="align-middle">
                             <form>
-                                <button type="submit" class="btn btn-secondary">See more</button>
+                                <button type="submit" class="btn btn-primary">See more</button>
                             </form>
                         </td>
                     </tr>
