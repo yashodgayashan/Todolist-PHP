@@ -1,5 +1,6 @@
 <?php 
     include('config/db_connect.php');
+    $errors = ["title"=>"", "description"=>""];
     if(isset($_GET["id"])){
         $id = mysqli_real_escape_string($connection,$_GET["id"]);
         if(isset($_GET["delete"])){
@@ -19,7 +20,40 @@
             mysqli_close($connection);
         }
     }elseif(isset($_POST["update"])){
-        echo "update";
+        $todo = ["id"=>htmlspecialchars($_POST["id"]), 
+                "title"=> htmlspecialchars($_POST["title"]), 
+                "description"=> htmlspecialchars($_POST["description"])
+                ];
+        if(empty($_POST["title"])){
+            $errors["title"] = "A title is required <br/>";
+        } else {
+            $title = $_POST["title"];
+            if(!preg_match('/^[a-zA-Z0-9\s]+$/',$title)){
+                $errors["title"] = "Title must only containe letters, numbers and spaces <br/>";
+            }
+        }
+        if(!empty($_POST["description"])){
+            $description = $_POST["description"];
+            if(!preg_match('/^[a-zA-Z0-9\s]+$/',$description)){
+                $errors["description"] = "Description must only containe letters, numbers and spaces <br/>";
+            }
+        }
+        if(!array_filter($errors)){
+            $id = mysqli_real_escape_string($connection, $_POST['id']);
+            $title = mysqli_real_escape_string($connection, $_POST['title']);
+            $description = mysqli_real_escape_string($connection, $_POST['description']);
+            // Creates the query.
+            $sql = "UPDATE todos SET title = '$title', description = '$description' WHERE id = '$id'";
+            
+            // Save to the database.
+            if(mysqli_query($connection,$sql)){
+                // Sucess
+                header("Location: index.php");
+            } else {
+                // Error
+                echo 'query error ' . mysqli_error($connection);
+            }
+        }
     }
 ?>
 <!DOCTYPE html>
@@ -36,11 +70,14 @@
                     <div class="form-group">
                         <label>Title</label>
                         <input type="text" name="title" class="form-control" placeholder="Title" id="title" value="<?php echo $todo["title"];?>">
+                        <div style="color:red;"><?php echo $errors["title"];?></div>
                     </div>
                     <div class="form-group">
                         <label>Description</label>
                         <input type="text" name="description" class="form-control" placeholder="Description" id="description" value="<?php echo $todo["description"];?>">
+                        <div style="color:red;"><?php echo $errors["description"];?></div>
                     </div>
+                    <input type="hidden" id="id" name="id" value="<?php echo $todo["id"]; ?>">
                     <a class="btn btn-primary" href="index.php" role="button">Back</a>
                     <button type="submit" name="update" class="btn btn-primary float-right" style="margin:5px;">Update</button>
                     <button type="button" class="btn btn-danger float-right" style="margin:5px;" data-toggle="modal" data-target="#myModal">

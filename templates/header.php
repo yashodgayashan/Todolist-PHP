@@ -41,7 +41,7 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="btn btn-outline-light" href="addTodo.php" role="button">Add Todo</a>
+                    <a class="btn btn-outline-light" href="addTodo.php" role="button">Login</a>
                 </li>
             </ul>
         </div>

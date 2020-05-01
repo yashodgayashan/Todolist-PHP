@@ -12,9 +12,7 @@
                 $errors["title"] = "Title must only containe letters, numbers and spaces <br/>";
             }
         }
-        if(empty($_POST["description"])){
-            $errors["description"] = "Ingredients is required <br/>";
-        } else {
+        if(!empty($_POST["description"])){
             $description = $_POST["description"];
             if(!preg_match('/^[a-zA-Z0-9\s]+$/',$description)){
                 $errors["description"] = "Description must only containe letters, numbers and spaces <br/>";
